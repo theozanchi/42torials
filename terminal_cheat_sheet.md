@@ -159,19 +159,31 @@ hello world
 
 `-r` is required to remove a directory
 ```shell
+~> rm some_directory
+rm: cannot remove 'some_directory': Is a directory
+```
+```shell
 ~> rm some_directory -r
 ```
 
 ## wget
-Downloaded from a URL with the wget method: 
+Download from a URL with the wget method: 
 ```shell
 ~> wget https://some_content.tar.xz
 ```
 
 ## touch
-Finally, if a file does not have the correct timestamp, it can be modified with the touch command. If the file does not exist, it is created
+Change timestamps with **touch**. If the file does not exist, it is created
 ```shell
 ~> touch temp.txt
+```
+```shell
+~> touch -t 0001010000 temp.txt
+```
+The timestamp is in format `YYMMDDhhmm` and output can be observed with `ls`
+```shell
+~> ls -l
+-rw-r--r-- 1 tzanchi 2023_berlin 0 Jan  1  2000 temp.txt
 ```
 
 # Searching
@@ -179,27 +191,18 @@ Finally, if a file does not have the correct timestamp, it can be modified with 
 Now, if you need to find something on your machine, you can use the find command. You will need to specify where you want to search, and the name of the file you are looking for. 
 You can use wildcards here to narrow your search. To learn more about wildcards, subscribe to our channel and wait for our upcoming video on the topic!
 ```shell
-~> find ~/Downloads -name "*.png"
-/Users/theozanchi/Downloads/bauges.png
-/Users/theozanchi/Downloads/gr54.png
-/Users/theozanchi/Downloads/IMG_1910.png
-/Users/theozanchi/Downloads/stevenson.png
-/Users/theozanchi/Downloads/Stoner_s Odyssey/7.background-mountains.png
-/Users/theozanchi/Downloads/Stoner_s Odyssey/2.flowers-top.png
-/Users/theozanchi/Downloads/Stoner_s Odyssey/8.planet.filters-scroll-horizontal+10.png
-/Users/theozanchi/Downloads/Stoner_s Odyssey/1.face-dj-booth.png
-/Users/theozanchi/Downloads/Stoner_s Odyssey/alternative-2.flowers-3.pillers-4.flowers-merged.png
-/Users/theozanchi/Downloads/Stoner_s Odyssey/5.boat.filters-scroll-horizontal+30.png
-/Users/theozanchi/Downloads/Stoner_s Odyssey/6.orb.filters-scroll-vertical+45.png
-/Users/theozanchi/Downloads/Stoner_s Odyssey/4.flowers-bottom.png
-/Users/theozanchi/Downloads/gr10.png
-/Users/theozanchi/Downloads/IMG_1993.png
-/Users/theozanchi/Downloads/IMG_2024.png
-/Users/theozanchi/Downloads/balise_gr.png
+~> > find . -name "*.png"
+./test/libft/.media/compilation_complete_screenshot.png
+./test/libft/.media/libft_logo.png
+./net_practice/img/internet.png
+./net_practice/img/host.png
+./net_practice/img/switch.png
+./net_practice/img/router.png
+
 ```
 
 ## grep
-Find allows you to look for files, grep allows you to look for specific informations in files. Let’s take back our example of the Hitchhiker’s guide to the Galaxy, the following command will return us all lines containing our search. Grep works line by line
+Grep looks for patterns in files. It returns all lines of the file that contain the pattern
 ```shell
 ~> grep hello hhgttg.txt 
 could have come and said a big hello to planet Earth, he thought,
@@ -238,6 +241,14 @@ he recognised in the distance, and hurried along to say hello,
 villagers he passed said hello, but there was a sense of nervousness
 standing there. I go up to say hello, then suddenly I see that
 ```
+Flag `-G` allows to use basic regex in patterns: 
+```shell
+~> grep -G "hel*" hhgttg.txt
+```
+Flag `-R` allows you to look for all files recursively of a directory 
+```shell
+~> grep -R pattern
+```
 
 # Permissions and ownership
 As you noticed in the long output of the ls utility, files and directories have permissions and owner. They can be changed with two commands: 
@@ -256,3 +267,14 @@ To change the owner, simply mark their name before the name of the file
 ```shell
 ~> chown another_user hhgttg.txt
 ```
+
+## sudo
+Some commands need root privilege to be executed. Sudo (**S**witch **U**ser **Do**) allows you to gain root privileges for the command that follows
+```shell
+~> sudo adduser new_user
+password:
+```
+
+# Redirections and pipes
+## Redirections
+
