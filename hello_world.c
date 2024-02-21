@@ -2,6 +2,6 @@
  
 int     main(void)
 {
-        printf("Hello world\n");
+        printf("Hello world\nThis is a conflict");
         return (0);
 }
