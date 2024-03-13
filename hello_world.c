@@ -2,5 +2,5 @@
 
 int main()
 {
-	printf("Hello world\n");
+	printf("Hello world, git is easy\n");
 }
